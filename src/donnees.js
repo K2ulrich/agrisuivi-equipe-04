@@ -28,7 +28,26 @@ export async function chargerDonnees(dossier) {
 // Exemple : creerReleve('p07', '64', '29', '2026-10-29')
 //   → { parcelle: 'P07', date: '2026-10-29', humidite: 64, temperature: 29 }
 export function creerReleve(parcelle, humiditeTexte, temperatureTexte, date) {
-  throw new Error("TODO Membre 4 : coder creerReleve dans src/donnees.js");
+  if (!parcelle || String(parcelle).trim() === "") {
+    throw new Error("Indiquez la parcelle. Exemple : node app.js releve P07 64 29");
+  }
+
+  const humidite = Number(humiditeTexte);
+  if (humiditeTexte === undefined || String(humiditeTexte).trim() === "" || Number.isNaN(humidite) || humidite < 0 || humidite > 100) {
+    throw new Error(`L'humidité doit être un nombre entre 0 et 100 (reçu : ${humiditeTexte})`);
+  }
+
+  const temperature = Number(temperatureTexte);
+  if (temperatureTexte === undefined || String(temperatureTexte).trim() === "" || Number.isNaN(temperature)) {
+    throw new Error(`La température doit être un nombre (reçu : ${temperatureTexte})`);
+  }
+
+  return {
+    parcelle: String(parcelle).trim().toUpperCase(),
+    date: date,
+    humidite: humidite,
+    temperature: temperature,
+  };
 }
 
 // Ajoute le relevé à la fin du fichier JSON, enregistre le fichier,
