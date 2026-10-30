@@ -38,3 +38,4 @@ export function resumeParCulture(parcelles) {
 
   return resume;
 }
+  
